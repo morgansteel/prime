@@ -1,8 +1,25 @@
 import { createInterface } from 'readline';
 var choice = 0;
+const { prompt } = prompt-sync;
 function askLucas() {
 
-    const getLucas = createInterface({ // Create prompt interface
+    let choice = prompt("Enter a prime exponent to test: ");
+    LUCAS_LEHMER(choice);
+
+}
+
+function askSieve() {
+    
+    let choice = prompt("Enter a limit to sieve primes: ")
+    SIEVE(choice);
+    
+}
+
+
+
+
+
+    /* const getLucas = createInterface({
         input: process.stdin,
         output: process.stdout
     });
@@ -13,7 +30,6 @@ function askLucas() {
         getLucas.close();
         UI_BUILDER();
     });
-
 }
 
 function askSPRP() {
@@ -34,32 +50,34 @@ function askSPRP() {
 }
 
 function askSieve() {
+
     const getSieve = createInterface({
         input: process.stdin,
         output: process.stdout
     });
     getSieve.question("Enter a limit to sieve primes to", (input) => {
         let choice = parseInt(input);
-        SIEVE(choice);
         getSieve.close();
+        SIEVE(choice);
         UI_BUILDER();
     });
 
 }
 
 function askTF() {
+
     const getTF = createInterface({
         input: process.stdin,
         output: process.stdout
     });
     getTF.question("Enter a number to trial factor", (input) => {
-        let p = parseInt(input);
-        TRIAL_FACTOR(p);
+        let choice = parseInt(input);
+        TRIAL_FACTOR(choice);
         getTF.close();
         UI_BUILDER();
     });
 
-}
+} */
 
 function UI_BUILDER() {
     console.log("[1] Sieve primes up to N");
@@ -73,32 +91,27 @@ function UI_BUILDER() {
         output: process.stdout
     });
     getChoice.question("Make your selection:", (input) => {
-        choice = input;
+        let choice = parseInt(input);
+        console.log("choice as parsed:" + choice);
 
-        if (choice === '1' || choice == 1) {
-            askSieve();
-            getChoice.close();
-        }
-        if (choice === '2') {
-            askSPRP();
-            getChoice.close();
-        }
-        if (choice === '3') {
-            askLucas();
-            getChoice.close();
-        }
-        if (choice === '4') {
-            askTF();
-            getChoice.close();
-        }
-        else {
-            console.log("Invalid choice.");
-            getChoice.close();
-            UI_BUILDER();
-            
+        switch (choice) {
+            case 1:
+                askSieve();
+                break;
+            case 2:
+                askSPRP();
+                break;
+            case 3:
+                askLucas();
+            case 4:
+                askTF();
+            default:
+                console.log("Invalid choice.")
+                UI_BUILDER;
         }
     });
 }
+
 
 var s = 0;
 var d;
@@ -173,7 +186,7 @@ function LUCAS_LEHMER(choice) {
     let seed = 4; // There are infinitely many starting values that function the same, but 4 is the smallest
     let mersenne_number = Math.pow(2, choice) - 1; // Calculate the Mersenne number 2^p - 1
 
-    for (let i = 3; i <= p; i++) {
+    for (let i = 3; i <= choice; i++) {
         // Definition of the Lucas-Lehmer test. After p - 2 iterations, check if seed == 0
         seed = (Math.pow(seed, 2) - 2) % mersenne_number; // Modular exponentiation used to prevent the Lucas numbers from overloading memory
         console.log("Residue: 0x " + seed); // Show the residue, which is just the seed after it's been manipulated by the LL test
