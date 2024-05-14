@@ -54,22 +54,17 @@ Currently, this implementation of the LL test takes no value P greater than 520.
 This implementation of such a test determines primality as follows:
 
 + Let `N` equal some odd integer, since only odd integers and 2 are prime.
-+ Compute `N - 1`.
-+ Write `N - 1` as d * 2<sup>s</sup> - 1, where `d` is odd and `s` is greater than zero.
-+ Compute 2<sup>d</sup> mod N. If this result is 1, then `N` is a 2-PRP. Otherwise,`N` is composite.
++ Write `N - 1` as d * 2<sup>s</sup>, where `d` is odd and `s` is greater than zero.
++ Compute 2<sup>d</sup> mod N. If this result is 1, then `N` is a 2-PRP. Otherwise, `N` is composite.
 
 This test is not conclusive if a result is prime. However, in practice, the difference between probable prime and proven prime is so unimaginably small, there is no difference.
 
 ## Strong probable primality testing
 
 > [!IMPORTANT]
-> This test is 100% conclusive. If a result is prime, there are no "ifs", "buts", or "ands". [Proven theorems](https://t5k.org/prove/prove2_3.html) from other mathematicians guarantee this.
+> This test is 100% conclusive. If a result is prime, there are no "ifs", "buts", or "ands". [Proven theorems](https://t5k.org/prove/prove2_3.html) from other mathematicians guarantee this. Currently, heuristic arguments suggest this test may be improved if the Riemann Hypothesis is proven true. 
 
-The structure of the strong probable primality test is quite similar to weak probable prime testing. We still compute N - 1 = d * 2<sup>s</sup>, but instead, bracketing of different ranges of values N can be used to strengthen the definition.
-
-### Brackets for N < 1,373,653
-
-If 2<sup>d</sup> = 1 (mod N) and 3<sup>d</sup> = 1 (mod N), then `N` is definitely prime. If any one of these are false, `N` is not prime.
+The structure of the strong probable primality test is quite similar to weak probable prime testing. We still compute N - 1 = d * 2<sup>s</sup>, but instead, bracketing of different ranges of values N can be used to strengthen the definition. Only prime bases less than 18 are needed to prove primality for numbers as large as 3 billion!
 
 > [!NOTE]
 > For more information on the exact ranges, check the "Show Theorems" tab while the program is running.
